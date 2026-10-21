@@ -1,4 +1,4 @@
-import csv, io, math, os, zipfile
+import csv, io, json, math, os, zipfile
 import requests
 import pandas as pd
 
@@ -42,9 +42,6 @@ def main():
     print("Downloading SETRAM static GTFS feed...")
     zf = fetch_gtfs_zip()
 
-    # dtype=str throughout: stop_id/route_id/trip_id mix numeric-looking and
-    # non-numeric values (e.g. "FLEX-381") across GTFS files -- letting pandas
-    # infer dtypes per-file causes silent int64-vs-object merge failures.
     routes = pd.read_csv(zf.open("routes.txt"), dtype=str)
     stops = pd.read_csv(zf.open("stops.txt"), dtype=str)
     trips = pd.read_csv(zf.open("trips.txt"), dtype=str)
@@ -52,19 +49,15 @@ def main():
     stop_times = pd.read_csv(zf.open("stop_times.txt"), usecols=["trip_id", "stop_id"], dtype=str)
     stops["stop_lat"] = stops["stop_lat"].astype(float)
     stops["stop_lon"] = stops["stop_lon"].astype(float)
-    print(f"Loaded {len(routes)} routes, {len(stops)} stops, {len(trips)} trips, {len(stop_times)} stop_times")
 
-    # Pick a representative weekday: the Tuesday service pattern with the
-    # longest validity window (avoids picking a one-off exception date).
     calendar["date_span"] = (
         pd.to_datetime(calendar["end_date"], format="%Y%m%d")
         - pd.to_datetime(calendar["start_date"], format="%Y%m%d")
     )
     tue_services = calendar[calendar["tuesday"] == "1"].sort_values("date_span", ascending=False)
     if tue_services.empty:
-        raise RuntimeError("No Tuesday service found in calendar.txt -- feed structure may have changed")
+        raise RuntimeError("No Tuesday service found in calendar.txt")
     service_id = tue_services.iloc[0]["service_id"]
-    print(f"Using service_id={service_id} as the representative weekday")
 
     weekday_trip_ids = set(trips[trips["service_id"] == service_id]["trip_id"])
     weekday_stop_times = stop_times[stop_times["trip_id"].isin(weekday_trip_ids)]
@@ -75,7 +68,6 @@ def main():
         on="stop_id", how="left",
     ).dropna(subset=["stop_lat"])
 
-    print(f"Assigning {len(freq)} stops to nearest of {len(communes)} communes...")
     freq["nearest_commune"] = freq.apply(
         lambda row: nearest_commune(row["stop_lat"], row["stop_lon"], communes), axis=1
     )
@@ -86,10 +78,18 @@ def main():
     routes[["route_id", "route_short_name", "route_long_name", "route_type"]].to_csv(
         "data/gtfs_static/routes.csv", index=False
     )
-    print(f"Wrote data/gtfs_static/stops_frequency.csv ({len(freq)} rows)")
-    print(f"Wrote data/gtfs_static/routes.csv ({len(routes)} rows)")
-    print("Top 5 busiest stops:")
-    print(freq[["stop_name", "daily_trip_count", "nearest_commune"]].head(5).to_string(index=False))
+
+    # --- CALCUL OFFRE VS DEMANDE PAR COMMUNE ---
+    supply_commune = freq.groupby("nearest_commune")["daily_trip_count"].sum().reset_index()
+    merged = pd.merge(communes_df, supply_commune, left_on="commune", right_on="nearest_commune", how="left").fillna(0)
+    merged["trips_per_1000_pop"] = (merged["daily_trip_count"] / (merged["population"] / 1000)).round(1)
+    merged = merged.sort_values("trips_per_1000_pop", ascending=False)
+
+    os.makedirs("docs/data", exist_ok=True)
+    supply_data = merged[["commune", "population", "daily_trip_count", "trips_per_1000_pop"]].to_dict("records")
+    with open("docs/data/supply_demand.json", "w") as f:
+        json.dump(supply_data, f, indent=2)
+    print("Wrote docs/data/supply_demand.json")
 
 if __name__ == "__main__":
     main()
