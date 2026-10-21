@@ -1,0 +1,122 @@
+[
+  {
+    "commune": "La-Chapelle-Saint-Aubin",
+    "population": 2319,
+    "daily_trip_count": 2343,
+    "trips_per_1000_pop": 1010.3
+  },
+  {
+    "commune": "Coulaines",
+    "population": 8226,
+    "daily_trip_count": 6267,
+    "trips_per_1000_pop": 761.9
+  },
+  {
+    "commune": "Rouillon",
+    "population": 2666,
+    "daily_trip_count": 1906,
+    "trips_per_1000_pop": 714.9
+  },
+  {
+    "commune": "Allonnes",
+    "population": 10846,
+    "daily_trip_count": 4017,
+    "trips_per_1000_pop": 370.4
+  },
+  {
+    "commune": "Arnage",
+    "population": 5548,
+    "daily_trip_count": 1638,
+    "trips_per_1000_pop": 295.2
+  },
+  {
+    "commune": "Yvre-l-Eveque",
+    "population": 4269,
+    "daily_trip_count": 750,
+    "trips_per_1000_pop": 175.7
+  },
+  {
+    "commune": "Saint-Saturnin",
+    "population": 2864,
+    "daily_trip_count": 490,
+    "trips_per_1000_pop": 171.1
+  },
+  {
+    "commune": "La-Milesse",
+    "population": 2650,
+    "daily_trip_count": 425,
+    "trips_per_1000_pop": 160.4
+  },
+  {
+    "commune": "Sarge-les-le-Mans",
+    "population": 3941,
+    "daily_trip_count": 630,
+    "trips_per_1000_pop": 159.9
+  },
+  {
+    "commune": "Le Mans",
+    "population": 148876,
+    "daily_trip_count": 22900,
+    "trips_per_1000_pop": 153.8
+  },
+  {
+    "commune": "Ruaudin",
+    "population": 3542,
+    "daily_trip_count": 536,
+    "trips_per_1000_pop": 151.3
+  },
+  {
+    "commune": "Champagne",
+    "population": 3728,
+    "daily_trip_count": 425,
+    "trips_per_1000_pop": 114.0
+  },
+  {
+    "commune": "Mulsanne",
+    "population": 5352,
+    "daily_trip_count": 525,
+    "trips_per_1000_pop": 98.1
+  },
+  {
+    "commune": "Aigne",
+    "population": 1724,
+    "daily_trip_count": 138,
+    "trips_per_1000_pop": 80.0
+  },
+  {
+    "commune": "Pruille-le-Chetif",
+    "population": 1357,
+    "daily_trip_count": 88,
+    "trips_per_1000_pop": 64.8
+  },
+  {
+    "commune": "Fay",
+    "population": 770,
+    "daily_trip_count": 44,
+    "trips_per_1000_pop": 57.1
+  },
+  {
+    "commune": "Trange",
+    "population": 1678,
+    "daily_trip_count": 87,
+    "trips_per_1000_pop": 51.8
+  },
+  {
+    "commune": "Chaufour-Notre-Dame",
+    "population": 1187,
+    "daily_trip_count": 58,
+    "trips_per_1000_pop": 48.9
+  },
+  {
+    "commune": "Saint-Georges-du-Bois",
+    "population": 2308,
+    "daily_trip_count": 96,
+    "trips_per_1000_pop": 41.6
+  },
+  {
+    "commune": "Fatines",
+    "population": 937,
+    "daily_trip_count": 38,
+    "trips_per_1000_pop": 40.6
+  }
+]
