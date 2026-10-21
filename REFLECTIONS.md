@@ -17,3 +17,6 @@ Associer l'avance à une couleur verte est trompeur : pour un usager, un bus par
 **Reflection 6.** Now check your Reflection 2 guess against the real answer: why would a 15-minute schedule for the static GTFS reference be wasteful, and why would a monthly schedule for the real-time delay snapshots make the whole real-time picture useless? Answer both halves — the mismatch runs in both directions.
 
 Exécuter le pipeline statique toutes les 15 minutes serait du gâchis, car les fiches horaires et les arrêts ne changent que très rarement dans l'année. À l'inverse, passer le pipeline temps réel à un rythme mensuel rendrait le suivi opérationnel totalement inutile, les retards et alertes évoluant d'une minute à l'autre.
+
+**Reflection 7.** Pick one route currently showing a large delay on your dashboard. Compare it against SETRAM's own live departure information or plain common sense (is there a known local event, roadwork, rush hour?). Did the number match what you'd expect? If not, what's your best guess for the discrepancy — a real disruption, a data artifact, or something else? This is the same "does this number make sense" habit this whole course keeps returning to; write what you actually found, not what you expected to find.
+
