@@ -26,3 +26,14 @@ En observant la ligne 5 sur le dashboard, un retard significatif apparaît par r
 
 La population légale mesure le lieu de résidence, mais pas les déplacements effectifs. Une commune ou un secteur peut compter très peu d'habitants permanents mais générer une demande de transport massive en journée s'il abrite une zone d'activités économiques, un campus universitaire ou un centre hospitalier. Utiliser la seule population sous-estime systématiquement les besoins de mobilité liés au travail et aux études.
 
+**Reflection 9.** State your chosen supply metric in one sentence. Then, using your own actual output (not a hypothetical), name one commune where the ranking looks wrong to you, and explain why — using what you actually know about that commune, not just the formula.
+
+La métrique choisie est le nombre de passages de bus/trams quotidiens programmés pour 1 000 habitants par commune. Dans les résultats, une commune comme La-Chapelle-Saint-Aubin peut apparaître sur-servie par rapport à sa population résidente car elle abrite de grandes zones commerciales/d'activités, concentrant un fort volume de passages qui ne desservent pas uniquement les résidents locaux.
+
+**Reflection 10.** Go back to Reflection 4's answer about per-route vs. per-stop logging. If you wanted "which stops are affected by repeated delays" answered from real-time data (not the static schedule), you'd hit that same data-volume problem again. You don't have to build this — but describe, in a few sentences, one concrete approach you'd take to aggregate stop-level events so a semester of 15-minute snapshots stays a reasonably-sized, git-tracked file.
+
+Pour suivre les retards par arrêt sans stocker des millions de lignes, on peut calculer une agrégation quotidienne ou hebdomadaire directement dans le script d'acquisition. Au lieu de sauvegarder chaque événement de 15 minutes, le script mettrait à jour un fichier récapitulatif stockant uniquement la moyenne quotidienne des retards et le nombre de passages manqués par stop_id. Cela réduirait le volume de données d'un facteur 100 tout en conservant la précision spatiale nécessaire.
+
+**Reflection 11 (closing).** Return to Reflection 1. Which of the business question's sub-questions turned out to be answerable today, which needed real judgment calls from you, and which genuinely need weeks of accumulated history before they're answerable at all? Compare this to what you originally guessed.
+
+Aujourd'hui, nous avons pu répondre facilement à la répartition des arrêts et au suivi des retards instantanés par ligne. En revanche, l'analyse de l'offre par rapport à la demande a demandé du recul pour interpréter les limites de la population, tandis que la détection des retards récurrents nécessite plusieurs semaines d'historique. Cela correspond bien à ce que j'avais anticipé au départ.
