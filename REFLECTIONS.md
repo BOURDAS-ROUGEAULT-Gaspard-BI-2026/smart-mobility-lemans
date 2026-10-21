@@ -1,3 +1,3 @@
-**Reflection 1.** Look at the business question's sub-questions in project3_smart_mobility_lemans.md (the section "The system should help answer"). Before building anything: which one or two of these do you think today's guided build will already answer well, and which do you suspect will need real judgment calls from you later?
-
-Le système actuel répondra bien à la répartition théorique de l'offre par commune et au suivi des retards moyens en temps réel par ligne. En revanche l'analyse de la demande repose sur un proxy qui ne traduit pas les déplacements réels, et l'identification de retards récurrents exige plusieurs semaines d'historique de données temps réel
+**Reflection 2.** Before reading the workflow steps later in this document: the static feed will run on a monthly schedule, the real-time feed every 15 minutes. Both could technically run every 15 minutes. Write your own guess now for why the static one doesn't.
+ 
+Le static feed n'a pas besoin d'être lancé toutes les 15min car il ne subit probablement que très peu de modifications journalières ou même hebdomadaires. De plus, le traitement du pipeline est sûrement assez lourd et le relancer souvent consommerait beaucoup de ressources réseau. 
