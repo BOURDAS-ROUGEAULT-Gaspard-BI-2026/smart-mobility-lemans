@@ -22,3 +22,7 @@ Exécuter le pipeline statique toutes les 15 minutes serait du gâchis, car les 
 
 En observant la ligne 5 sur le dashboard, un retard significatif apparaît par rapport à la moyenne du réseau. Cette anomalie correspond à la réalité du terrain : la présence de travaux rue Alfred de Vigny ralentit la circulation et perturbe la fluidité du parcours. Ce chiffre confirme que le pipeline capte correctement les contraintes opérationnelles réelles du réseau SETRAM et non un biais ou artefact de données.
 
+**Reflection 8.** Before writing any code: you're about to use commune population as a stand-in for real transport demand, because real ridership data doesn't exist as open data. Name one concrete, realistic way a commune could have low population but genuinely high transport demand (or the reverse) — so you go into this exercise already knowing the proxy's failure mode, not just its formula.
+
+La population légale mesure le lieu de résidence, mais pas les déplacements effectifs. Une commune ou un secteur peut compter très peu d'habitants permanents mais générer une demande de transport massive en journée s'il abrite une zone d'activités économiques, un campus universitaire ou un centre hospitalier. Utiliser la seule population sous-estime systématiquement les besoins de mobilité liés au travail et aux études.
+
