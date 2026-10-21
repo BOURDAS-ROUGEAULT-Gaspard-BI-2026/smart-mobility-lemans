@@ -20,3 +20,5 @@ Exécuter le pipeline statique toutes les 15 minutes serait du gâchis, car les 
 
 **Reflection 7.** Pick one route currently showing a large delay on your dashboard. Compare it against SETRAM's own live departure information or plain common sense (is there a known local event, roadwork, rush hour?). Did the number match what you'd expect? If not, what's your best guess for the discrepancy — a real disruption, a data artifact, or something else? This is the same "does this number make sense" habit this whole course keeps returning to; write what you actually found, not what you expected to find.
 
+En observant la ligne 5 sur le dashboard, un retard significatif apparaît par rapport à la moyenne du réseau. Cette anomalie correspond à la réalité du terrain : la présence de travaux rue Alfred de Vigny ralentit la circulation et perturbe la fluidité du parcours. Ce chiffre confirme que le pipeline capte correctement les contraintes opérationnelles réelles du réseau SETRAM et non un biais ou artefact de données.
+
