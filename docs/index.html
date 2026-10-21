@@ -23,6 +23,13 @@
   <div id="alerts">Loading alerts...</div>
   <canvas id="delayChart" height="320"></canvas>
   <p id="updated"></p>
+  <h2>Transport Supply vs. Demand by Commune</h2>
+  <style>
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background-color: #f4f4f4; }
+  </style>
+  <div id="supplyTableContainer">Loading supply vs. demand data...</div>
 
 <script>
 fetch('data/current_state.json')
@@ -105,6 +112,24 @@ fetch('data/current_state.json')
     document.getElementById('kpis').innerHTML =
       '<p>Could not load network status (' + err + '). Check that ' +
       '<code>docs/data/current_state.json</code> exists in the repo.</p>';
+  });
+  fetch('data/supply_demand.json')
+  .then(r => r.json())
+  .then(data => {
+    let html = '<table><thead><tr><th>Commune</th><th>Population</th><th>Daily Scheduled Trips</th><th>Trips per 1,000 residents</th></tr></thead><tbody>';
+    data.forEach(row => {
+      html += `<tr>
+        <td><strong>${row.commune}</strong></td>
+        <td>${row.population.toLocaleString()}</td>
+        <td>${row.daily_trip_count.toLocaleString()}</td>
+        <td><strong>${row.trips_per_1000_pop}</strong></td>
+      </tr>`;
+    });
+    html += '</tbody></table>';
+    document.getElementById('supplyTableContainer').innerHTML = html;
+  })
+  .catch(err => {
+    document.getElementById('supplyTableContainer').innerHTML = '<p>Supply vs. demand data not generated yet. Run the static reference workflow.</p>';
   });
 </script>
 </body>
